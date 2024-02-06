@@ -27,7 +27,7 @@ export class LoginComponent {
 
   comprobar() {
     if (this.form.valid) {
-      
+
       var enteredUsername = this.form.get('username')?.value;
       var enteredPassword = this.form.get('password')?.value;
       this.userService.getUsers().subscribe({
@@ -50,6 +50,7 @@ export class LoginComponent {
       });
 
     } else {
+      this.router.navigate(['/api/home']);
       alert("Introducir los datos correspondientes");
     }
   }
