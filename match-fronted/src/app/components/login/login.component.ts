@@ -26,8 +26,7 @@ export class LoginComponent {
   }
 
   comprobar() {
-    if (this.form.valid) {
-
+    
       var enteredUsername = this.form.get('username')?.value;
       var enteredPassword = this.form.get('password')?.value;
       this.userService.getUsers().subscribe({
@@ -38,7 +37,7 @@ export class LoginComponent {
             sessionStorage.setItem("username", enteredUsername);
             sessionStorage.setItem("password", enteredPassword);
             console.log("pasa aqui")
-            this.router.navigate(['/api/home']);
+            this.router.navigate(['/home']);
           } else {
             alert("Credenciales incorrectas");
           }
@@ -48,10 +47,5 @@ export class LoginComponent {
           console.error("Ha ocurrido un error", err);
         }
       });
-
-    } else {
-      this.router.navigate(['/api/home']);
-      alert("Introducir los datos correspondientes");
-    }
   }
 }
