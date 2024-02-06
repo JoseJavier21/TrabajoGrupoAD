@@ -25,6 +25,8 @@ export class LoginComponent {
     });
   }
 
+// nofunciona por los datos los comprueba con session storage
+
   comprobar() {
 
       var enteredUsername = this.form.get('username')?.value;
@@ -32,11 +34,10 @@ export class LoginComponent {
       this.userService.getUsers().subscribe({
         next: users => {
           const userFound = users.find(user => user.username === enteredUsername);
-          console.log("pasa aqui")
+
           if (userFound) {
             sessionStorage.setItem("username", enteredUsername);
             sessionStorage.setItem("password", enteredPassword);
-
             this.router.navigate(['/home']);
           } else {
             alert("Credenciales incorrectas");
