@@ -26,17 +26,17 @@ export class LoginComponent {
   }
 
   comprobar() {
-    
+
       var enteredUsername = this.form.get('username')?.value;
       var enteredPassword = this.form.get('password')?.value;
       this.userService.getUsers().subscribe({
         next: users => {
-          const userFound = users.find(user => user.username === enteredUsername && user.password === enteredPassword);
-
+          const userFound = users.find(user => user.username === enteredUsername);
+          console.log("pasa aqui")
           if (userFound) {
             sessionStorage.setItem("username", enteredUsername);
             sessionStorage.setItem("password", enteredPassword);
-            console.log("pasa aqui")
+
             this.router.navigate(['/home']);
           } else {
             alert("Credenciales incorrectas");
