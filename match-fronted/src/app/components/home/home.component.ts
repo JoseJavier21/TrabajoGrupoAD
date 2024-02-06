@@ -4,11 +4,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/model/Usuario';
 
 
-interface Person {
-  id: number;
-  name: string;
-}
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -35,19 +30,18 @@ export class HomeComponent {
     );
   }
 
-  /*selectPerson(selectedPerson: Person): void {
-    // Verificar si ya hay un match con la persona seleccionada
-    const existingMatch = this.matches.find(match => match.id === selectedPerson.id);
+  /*selectUser(selectedUser: Usuario): void {
+    this.currentUser = selectedUser;
+
+    const existingMatch = this.matches.find(match => match.id === selectedUser.id);
 
     if (existingMatch) {
-      // Si ya hay un match, eliminarlo (deseleccionar la persona)
-      this.matches = this.matches.filter(match => match.id !== selectedPerson.id);
+      this.matches = this.matches.filter(match => match.id !== selectedUser.id);
     } else {
-      // Si no hay un match, verificar si la persona seleccionada también te ha seleccionado
       const hasMatch = Math.random() < 0.5; // Simulación aleatoria de un match
 
       if (hasMatch) {
-        this.matches.push(selectedPerson);
+        this.matches.push(selectedUser);
       }
     }
   }*/
