@@ -14,9 +14,8 @@ export class UsuarioService {
   private url: string = "http://localhost:8080/api/home"
   private httpHeaders: HttpHeaders = new HttpHeaders({'Content-type': 'application/json'})
 
-  saveUser(user: Usuario): Observable<any>{
-    this.router.navigate(['/home'])
-    return this.http.post<any>(this.url, user, {headers: this.httpHeaders});
+  saveUser(user: Usuario): Observable<Usuario>{
+    return this.http.post<Usuario>(this.url, user, {headers: this.httpHeaders});
   }
 
   getUsers(): Observable<Usuario[]> {

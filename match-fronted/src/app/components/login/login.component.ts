@@ -27,28 +27,29 @@ export class LoginComponent {
 
   comprobar() {
     if (this.form.valid) {
-      sessionStorage.setItem("username", this.user.username);
-      sessionStorage.setItem("password", this.user.password);
-      this.save();
+      const enteredUsername = this.form.get('username')?.value;
+      const enteredPassword = this.form.get('password')?.value;
+
+      // Realiza la verificación de credenciales directamente en el componente
+      this.userService.getUsers().subscribe({
+        next: users => {
+          const userFound = users.find(user => user.username === enteredUsername && user.password === enteredPassword);
+
+          if (userFound) {
+            sessionStorage.setItem("username", enteredUsername);
+            sessionStorage.setItem("password", enteredPassword);
+            this.router.navigate(['/home']);
+          } else {
+            alert("Credenciales incorrectas");
+          }
+        },
+        error: err => {
+          alert("Ha ocurrido un error al obtener la lista de usuarios");
+          console.error("Ha ocurrido un error", err);
+        }
+      });
     } else {
       alert("Introducir los datos correspondientes");
     }
-  }
-
-  save() {
-    this.user.username = this.form.get('username')?.value;
-    this.user.password = this.form.get('password')?.value;
-
-    this.userService.saveUser(this.user).subscribe({
-      next: res => {
-        alert("Se ha registrado con éxito");
-        console.log(res);
-        this.router.navigate(['/home'])
-      },
-      error: err => {
-        alert("Ha ocurrido un error");
-        console.error("Ha ocurrido un error", err);
-      }
-    });
   }
 }
