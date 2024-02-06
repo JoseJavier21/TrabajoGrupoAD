@@ -27,10 +27,9 @@ export class LoginComponent {
 
   comprobar() {
     if (this.form.valid) {
-      const enteredUsername = this.form.get('username')?.value;
-      const enteredPassword = this.form.get('password')?.value;
+      var enteredUsername = this.form.get('username')?.value;
+      var enteredPassword = this.form.get('password')?.value;
 
-      // Realiza la verificación de credenciales directamente en el componente
       this.userService.getUsers().subscribe({
         next: users => {
           const userFound = users.find(user => user.username === enteredUsername && user.password === enteredPassword);
@@ -38,7 +37,8 @@ export class LoginComponent {
           if (userFound) {
             sessionStorage.setItem("username", enteredUsername);
             sessionStorage.setItem("password", enteredPassword);
-            this.router.navigate(['/home']);
+            console.log("pasa a qui")
+            this.router.navigate(['/api/home']);
           } else {
             alert("Credenciales incorrectas");
           }
