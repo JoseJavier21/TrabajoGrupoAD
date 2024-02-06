@@ -18,4 +18,8 @@ export class UsuarioService {
     this.router.navigate(['/home'])
     return this.http.post<any>(this.url, user, {headers: this.httpHeaders});
   }
+
+  getUsers(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.url);
+  }
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Usuario } from 'src/app/model/Usuario';
 
 
 interface Person {
@@ -13,27 +15,27 @@ interface Person {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  people: Person[] = [];
-  currentUser: Person | null = null;
-  matches: Person[] = [];
+  users: Usuario[] = [];
+  currentUser: Usuario | null = null;
+  matches: Usuario[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-    // Hacer una solicitud al backend para obtener la lista de personas
-    this.http.get<Person[]>('url_del_backend/personas').subscribe(
+    // Utilizar el servicio para obtener la lista de usuarios
+    this.usuarioService.getUsers().subscribe(
       (data) => {
-        this.people = data;
+        this.users = data;
         // Supongamos que el usuario actual es el primero por defecto
-        this.currentUser = this.people.length > 0 ? this.people[0] : null;
+        this.currentUser = this.users.length > 0 ? this.users[0] : null;
       },
       (error) => {
-        console.error('Error al obtener la lista de personas desde el backend', error);
+        console.error('Error al obtener la lista de usuarios desde el backend', error);
       }
     );
   }
 
-  selectPerson(selectedPerson: Person): void {
+  /*selectPerson(selectedPerson: Person): void {
     // Verificar si ya hay un match con la persona seleccionada
     const existingMatch = this.matches.find(match => match.id === selectedPerson.id);
 
@@ -48,6 +50,6 @@ export class HomeComponent {
         this.matches.push(selectedPerson);
       }
     }
-  }
+  }*/
 
 }
