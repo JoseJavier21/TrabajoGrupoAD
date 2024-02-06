@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+}
+
+h1{
+    margin-left: 50%;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+}
+
