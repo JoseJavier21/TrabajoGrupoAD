@@ -2,7 +2,7 @@
   <h2>Home</h2>
   <ul>
     <li *ngFor="let user of users" >
-      {{ user.username }} (ID: {{ user.id }})
+      {{ user.username }} - Id: {{ user.id }}
     </li>
   </ul>
 
@@ -10,7 +10,7 @@
     <h3>Matches:</h3>
     <ul>
       <li *ngFor="let match of matches">
-        {{ match.username }} (ID: {{ match.id }})
+        {{ match.username }} - Id: {{ match.id }}
       </li>
     </ul>
   </div>
